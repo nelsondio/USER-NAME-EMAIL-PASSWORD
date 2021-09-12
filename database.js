@@ -1,10 +1,13 @@
 // database.js
 // database.js with sql for now
 const sqlite3 = require('sqlite3').verbose();
+const md5 = require('md5');
+
+
 let db;
 const dbName = "db.sqlite3";
 
-db = new sqlite3.Database(dbName, sqlite3.OPEN_READWRITE, (err) => {
+db = new sqlite3.Database(dbName,  (err) => {
     if (err) {
         console.error(err.message);
     }
@@ -36,12 +39,14 @@ async function getItems(){
 
 	let myPromise = new Promise ( (resolve, reject) => {
 		db.all(sql, params, (err, rows) => {
+			console.log(rows); //array of js objects
 			if (err) return reject(err);
 			resolve(
+				rows
 				//"resolved!!!"
-				rows.map( item => 
-					Object.assign( {}, item)
-				)
+//				rows.map( item => 
+//					Object.assign( {}, item)
+//				) //map must be clean, to change a field this is the syntax
 			)
 		})
 	});
