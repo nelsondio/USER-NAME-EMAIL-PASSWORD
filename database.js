@@ -46,6 +46,18 @@ async function removeItem(id) {
 	return await myPromise;
 }
 
+async function updateItem(id, item) {
+	let sql = 'UPDATE  user SET name=?, email=?, password=? WHERE id=?';
+	let params = [item.name, item.email, item.password, id];
+	let myPromise = new Promise ( ( resolve, reject) => {
+		db.run(sql, params, err => {
+			if (err) return reject(err);
+			resolve();
+		})
+	});
+	return await myPromise;
+}
+
 async function getOneItem(id) {
 	let sql = 'SELECT * FROM user WHERE id=?';
 	let params = [id];
@@ -115,5 +127,6 @@ module.exports = {
 	storeItem,
 	getOneItem,
 	removeItem,
+	updateItem,
 }
 

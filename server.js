@@ -6,6 +6,7 @@ const getItemsMain = require('./getItemsRoute');
 const addItemRoute = require('./addItemRoute');
 const getItemRoute = require('./getItemRoute');
 const deleteItemRoute = require('./deleteItemRoute');
+const updateItemRoute = require('./updateItemRoute');
 
 const app = express();
 
@@ -25,7 +26,9 @@ app.get('/api/user/:id', getItemRoute);
 
 app.delete('/api/user/:id', deleteItemRoute);
 
+app.put('/api/user/:id', updateItemRoute);
+
 app.listen(3434, (err) => {
-	console.log('listning on port 3434');
+	console.log('listening on port 3434');
 });
 

@@ -1,0 +1,20 @@
+Server root => addItemRoute: call storeItem(in database.js) 
+
+addItemRoute: module.exports = async (req, res) => req.body.name:email:md5(password)
+        => await database.js/storeItem(item) {promise} and res.send(item)
+
+getItemRoute: module.exports = async (req, res) => req.params.id
+        => await database.js/getOneItem(id) {promise} and res.send(item)
+
+getItemsRoute: module.exports = async (req, res) =>
+        => await database.js/getItems() {promise} and res.send(err, rows)
+
+deleteItemRoute: module.exports = async (req, res) => req.params.id
+        => await database/removeItem(id) {promise} 
+
+modifyItemRoute:..... => req.params.id
+        => await database/putItem  or pathItem or updateItem (id) {promise} and res.send()
+
+
+server.js contain all the routes
+database.js needs to export all async functions: getAll, postOne, getOne, deleteOne, modifyOne
