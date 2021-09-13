@@ -33,6 +33,44 @@ db = new sqlite3.Database(dbName,  (err) => {
     }
 });
 
+
+async function removeItem(id) {
+	let sql = 'DELETE  FROM user WHERE id=?';
+	let params = [id];
+	let myPromise = new Promise ( (resolve, reject) => {
+		db.all(sql, params, (err, rows) => {
+			if (err) return reject(err);
+			resolve(  ) 
+		});
+	});
+	return await myPromise;
+}
+
+async function getOneItem(id) {
+	let sql = 'SELECT * FROM user WHERE id=?';
+	let params = [id];
+	let myPromise = new Promise ( (resolve, reject) => {
+		db.all(sql, params, (err, rows) => {
+			if (err) return reject(err);
+			resolve(rows[0]  ) 
+		});
+	});
+	return await myPromise;
+}
+
+async function storeItem(item) {
+	console.log(`storeItem(item.name) ${item.name}` ) ; 
+	let myPromise = new Promise ( (resolve, reject) => {
+		let sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)';
+		let params =  [item.name, item.email, item.password];
+		db.run(sql, params, err => {
+			if (err) return reject(err.message);
+			resolve()
+		})
+	})
+	return await myPromise;
+}
+
 async function getItems(){
 	let sql = 'SELECT * FROM user';
 	let params = [];
@@ -74,5 +112,8 @@ db.close((err) => {
 module.exports = {
 	getItems,
 	db,
+	storeItem,
+	getOneItem,
+	removeItem,
 }
 

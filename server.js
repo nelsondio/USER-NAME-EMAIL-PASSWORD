@@ -3,10 +3,13 @@
 //
 const express = require('express');
 const getItemsMain = require('./getItemsRoute');
-//const addItem = require('./addItem');
+const addItemRoute = require('./addItemRoute');
+const getItemRoute = require('./getItemRoute');
+const deleteItemRoute = require('./deleteItemRoute');
 
 const app = express();
 
+app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static('public'));
 
@@ -15,11 +18,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/users', getItemsMain);
-app.get('/api/users', (req, res) => {
-	res.send('/api/users get all\n');
-});
 
-//app.post('/api/users', addItem);
+app.post('/api/users', addItemRoute);
+
+app.get('/api/user/:id', getItemRoute);
+
+app.delete('/api/user/:id', deleteItemRoute);
 
 app.listen(3434, (err) => {
 	console.log('listning on port 3434');
