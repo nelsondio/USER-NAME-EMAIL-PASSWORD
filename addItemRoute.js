@@ -6,7 +6,7 @@ module.exports  = async  (req, res) => {
 	const item = {
 		name: req.body.name,
 		email: req.body.email,
-		password: (req.body.password),
+		password: md5(req.body.password),
 	}
 	await db.storeItem(item);
 	res.send(item);
